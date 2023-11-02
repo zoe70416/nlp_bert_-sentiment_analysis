@@ -1,7 +1,7 @@
 # nlp_bert_-sentiment_analysis
 
 
-'''
+```
 ssh wh2405@gw.hpc.nyu.edu
 ssh wh2405@greene.hpc.nyu.edu
 ssh burst
@@ -11,5 +11,5 @@ singularity exec --bind /scratch --nv --overlay /scratch/wh2405/overlay-25GB-500
 conda activate 2590-hw3
 pip install -r requirements.txt
 
-'''
+```
 
