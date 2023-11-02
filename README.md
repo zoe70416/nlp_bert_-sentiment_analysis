@@ -1,5 +1,6 @@
 # nlp_bert_-sentiment_analysis
 
+## Goal 
 The goal of this homework is to get familiar with how to fine-tune language models for a specific task and understand the challenges involved in it. More specifically, we will first fine-tune a BERT-base model for sentiment analysis using the IMDB dataset.
 
 
@@ -21,6 +22,8 @@ singularity exec --bind /scratch --nv --overlay /scratch/wh2405/overlay-25GB-500
 conda activate 2590-hw3
 pip install -r requirements.txt
 
+
+## PartI- Training w/o Augementation
 ```
 
 Before proceeding with training on the whole dataset, test your training loop on a small subset of the data to verify its correctness. 
@@ -34,7 +37,7 @@ Use the following command: python3 main.py --train --eval --debug_train.
 Use the following command: python3 main.py --train --eval
 ```
 
-PartII: 
+## PartII- Training Augementation:
 
 Design transformations of the evaluation dataset which will serve as out-of-distribution (OOD) evaluation for models. These transformations should be designed so that in most cases, the new transformed example has the same label as the original example — a human would assign the same label to the original and transformed example. e.g. For an original movie review “Titanic is the best movie I have ever seen.”, a transformation which maintains the label “Titanic is the best film I have ever seen.”.
 
@@ -60,7 +63,7 @@ Train a model using this augmented data by executing the following command
 python3 main.py --train_augmented --eval_transformed
 ```
 
-
+## PartIII- Evaluation
 Evaluate the performance of the above-trained model. 
 
 ```
