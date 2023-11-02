@@ -121,7 +121,7 @@ def create_augmented_dataloader(args, dataset):
     # Get 5000 random transformed samples
     num_augmented_examples = 5000
     random_subset = dataset["train"].shuffle(seed=42).select(range(num_augmented_examples))
-    transformed_dataset = random_subset.map(custom_transform, load_from_cache_file=False)
+    transformed_dataset = random_subset.map(custom_transform_train, load_from_cache_file=False)
 
     # Combine with original training set
     combined_dataset = datasets.concatenate_datasets([dataset["train"], transformed_dataset])

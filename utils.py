@@ -13,6 +13,7 @@ import argparse
 from nltk.corpus import wordnet
 from nltk import word_tokenize
 from nltk.tokenize.treebank import TreebankWordDetokenizer
+
 # from nltk.corpus import wordnet
 import nltk 
 nltk.download('wordnet')
@@ -51,14 +52,15 @@ def custom_transform(example):
     text = example["text"].split()
 
     for i in range(len(text)):
-        # Introduce typos with a certain probability
-        if random.random() < 0.6:  # You can adjust the probability as needed
-            text[i] = introduce_typos(text[i])
-
         # Replace with synonyms with a certain probability
-        if random.random() < 0.6:  # You can adjust the probability as needed
+        if random.random() < 0.5:  # You can adjust the probability as needed
             text[i] = replace_with_synonyms(text[i])
 
+        # Introduce typos with a certain probability
+        if random.random() < 0.3:  # You can adjust the probability as needed
+            text[i] = introduce_typos(text[i])
+
+        
     example["text"] = ' '.join(text)
 
     ##### YOUR CODE ENDS HERE ######
@@ -114,16 +116,30 @@ def introduce_typos(word):
                 word[i] = random.choice(typo_options)
     return ''.join(word)
 
-'''
-# Define the data augmentation function
-def augment_data(text):
-    words = text.split()
-    augmented_words = []
-    for word in words:
-        if random.random() < 0.5:
-            augmented_words.append(replace_with_synonyms(word))
-        else:
-            augmented_words.append(introduce_typos(word))
-    return ' '.join(augmented_words)
+def custom_transform_train(example):
+    ################################
+    ##### YOUR CODE BEGINGS HERE ###
 
-'''
+    # Design and implement the transformation as mentioned in pdf
+    # You are free to implement any transformation but the comments at the top roughly describe
+    # how you could implement two of them --- synonym replacement and typos.
+
+    # You should update example["text"] using your transformation
+
+    text = example["text"].split()
+
+    for i in range(len(text)):
+        # Replace with synonyms with a certain probability
+        if random.random() < 0.5:  # You can adjust the probability as needed
+            text[i] = replace_with_synonyms(text[i])
+
+        # Introduce typos with a certain probability
+        if random.random() > 0.5:  # You can adjust the probability as needed
+            text[i] = introduce_typos(text[i])
+
+        
+    example["text"] = ' '.join(text)
+
+    ##### YOUR CODE ENDS HERE ######
+
+    return example
